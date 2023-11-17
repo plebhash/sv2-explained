@@ -27,10 +27,10 @@ A mathematical function that takes an input of any size ("preimage") and produce
 
 - Deterministic
 - Fixed size output (in bits)
-- Pre-image resistance
+- Preimage resistance
 - Collision resistance
 
-Although the hash can be seen as a number, it is usually encoded as a string of characters.
+Although the hash is a binary number, it is usually encoded as a string of characters for human readability.
 
 ---
 
@@ -52,9 +52,9 @@ There are two main purposes for mining:
 
 ## How mining works
 
-Miners need to find a block header (preimage) which generates a hash that satisfies the current Bitcoin network **difficulty target** (readjusted every 2016 blocks).
+Bitcoin's **`difficulty target`** represents the maximum value that a block header hash can be in order to be considered valid for the entire network.
 
-The difficulty target represents the maximum value that a block header hash can be in order to be considered valid for the entire network.
+Miners need to find a block header (preimage) which generates a hash that satisfies the current `difficulty target` (readjusted every 2016 blocks).
 
 ---
 
@@ -79,9 +79,9 @@ The corresponding block header includes the following fields:
 
 ## How mining works
 
-The miner repeatedly changes the `nonce` value and applies a double `SHA256` to the block header until the output is smaller than the current difficulty target.
+The miner repeatedly changes the `nonce` value and applies a double `SHA256` to the block header until the output is smaller than the current `difficulty target`.
 
-If the difficulty target is met, the miner adds the new mined block to its local copy of the blockchain and immediately broadcasts the new block to all the other peers which he is connected to.
+If the `difficulty target` is met, the miner adds the new mined block to its local copy of the blockchain and immediately broadcasts the new block to all the other peers which he is connected to.
 
 The propagation of the new block needs to be as fast as possible since it’s crucial for the miner to claim the block reward.
 
@@ -101,7 +101,7 @@ Instead, it contains only one input known as the coinbase, which essentially gen
 
 The first block was mined by Satoshi Nakamoto on January 3, 2009.
 
-In the beginning, the network difficulty was 1. The total number of miners was very small, so the difficulty didn’t increase, and it was possible to mine  blocks using an average personal computer. It was the only time in history when CPU mining was profitable. 
+In the beginning, the network `difficulty target` was `1`. The total number of miners was very small, so the difficulty didn’t increase, and it was possible to mine  blocks using an average personal computer. It was the only time in history when CPU mining was profitable. 
 
 As mining received more media attention, the mining difficulty started to rise.
 
@@ -109,9 +109,9 @@ As mining received more media attention, the mining difficulty started to rise.
 
 ## Mining history and evolution
 
-In October 2010, the first mining device based on GPUs was developed. The GPU’s excellence at computing simple mathematical operations in parallel, the global hashrate increased, leading to a network difficulty increase.
+In October 2010, the first mining device based on GPUs was developed. The GPU’s excellence at computing simple mathematical operations in parallel caused the global hashrate increase, also increasing the overall network `difficulty target`.
 
-In 2011 FPGAs came into the mining game. They were even faster than GPUs, contributing to the ever-increasing network hashrate, and difficulty.
+In 2011 FPGAs came into the mining game. They were even faster than GPUs, contributing to the ever-increasing network hashrate, and and `difficulty target`.
 
 ---
 
@@ -149,8 +149,6 @@ In Solo mining, the miner relies solely on its own computational power to compet
 
 The block reward is paid entirely to the solo miner. The miner's address is put into the coinbase output script. 
 
-The miner runs a local Bitcoin full-node to get transactions to validate from, in addition to the other fields needed to build the block header.
-
 ---
 
 ## Solo mining
@@ -158,7 +156,7 @@ The miner runs a local Bitcoin full-node to get transactions to validate from, i
 footer: Source: Meni Rosenfeld. Analysis of bitcoin pooled mining reward systems. arXiv preprint arXiv:1112.4980, 2011.
  -->
 
-The difficulty target $D$ is chosen so that every computed hash will lead to a valid block with probability $\frac{1}{2^{32}D}$.
+The `difficulty target` $D$ is chosen so that every computed hash will lead to a valid block with probability $\frac{1}{2^{32}D}$.
 
 A miner with hashrate $h$ mining for a period of time $t$, will calculate a total of $ht$ hashes, and so will find on average $\frac{ht}{2^{32}D}$ blocks.
 
@@ -172,7 +170,7 @@ If the reward for each block is $B$, the miner's expected reward is thus $\frac{
 
 Bob can perform a billion hash calculations per second: $h = 1 \textrm{Ghash/s} = 10^9 \textrm{hash/s}$.
 
-If Bob mines continuously for a day (86400 seconds) when the difficulty is $D = 1690906$ and the block reward is $B = 50 \textrm{BTC}$, he will find on average $\frac{ht}{2^{32}D} = \frac{10^9\textrm{hash/s·86400s}}{2^{32}1690906} ≈ 0.0119$ blocks, and receive payment of
+If Bob mines continuously for a day (86400 seconds) when the `difficulty target` is $D = 1690906$ and the block reward is $B = 50 \textrm{BTC}$, he will find on average $\frac{ht}{2^{32}D} = \frac{10^9\textrm{hash/s·86400s}}{2^{32}1690906} ≈ 0.0119$ blocks, and receive payment of
 $0.0119B = 0.595$ BTC on average.
 
 ---
@@ -211,9 +209,9 @@ The concept of pooled mining become a popular solution to this problem.
 
 ## Pooled mining
 
-Pools are systems where multiple miners combine their hashing power and share the resulting rewards while  efficiently splitting the nonce search-space.
+Pools are systems where multiple miners combine their hashing power and share the resulting rewards.
 
-The candidate block is built to pay the reward to the pool Bitcoin address.
+The candidate block is built to pay the reward to the pool's Bitcoin address.
 
 Individual miners connect their mining equipment to the pool server. Each miner communicates a Bitcoin address to the pool, which is used to receive their share of the rewards.
 
@@ -231,7 +229,7 @@ The main business model of the pool operators is typically a percentage fee whic
 
 ### Shares
 
-The pool accounts for the work done by each individual miner via **shares**, which are block header hashes mined under a lower difficulty target.
+The pool accounts for the work done by each individual miner via **shares**, which are block header hashes mined under a lower `difficulty target`.
 
 ---
 
